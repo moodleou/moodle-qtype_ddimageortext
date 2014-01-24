@@ -61,7 +61,11 @@ class qtype_ddtoimage_question_base extends qtype_gapselect_question_base {
                                                                 $response[$this->field($placeno)]) {
                 $selected = $this->get_selected_choice($place->group,
                                                                 $response[$this->field($placeno)]);
-                $summarisechoice = $selected->summarise();
+                if (method_exists($selected, 'summarise')) {
+                    $summarisechoice = $selected->summarise();
+                } else {
+                    $summarisechoice = '';
+                }
                 $allblank = false;
             } else {
                 $summarisechoice = '';
