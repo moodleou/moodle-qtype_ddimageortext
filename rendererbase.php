@@ -114,9 +114,10 @@ class qtype_ddtoimage_renderer_base extends qtype_with_combined_feedback_rendere
             $hiddens .= $html;
             $question->places[$placeno]->fieldname = $fieldname;
         }
+        $formulationuid = uniqid();
         $output .= html_writer::tag('div',
-                $droparea . $dragitems . $dropzones . $hiddens, array('class'=>'ddarea'));
-        $topnode = 'div#q'.$qa->get_slot().' div.ddarea';
+                $droparea . $dragitems . $dropzones . $hiddens, array('class'=>'ddarea', 'data-formulation-instance-id'=> $formulationuid));
+        $topnode = 'div#q'.$qa->get_slot().' div.ddarea[data-formulation-instance-id='."'$formulationuid'".']';
         $params = array('drops' => $question->places,
                         'topnode' => $topnode,
                         'readonly' => $options->readonly);
